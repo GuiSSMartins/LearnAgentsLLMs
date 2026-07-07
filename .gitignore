@@ -179,3 +179,27 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
+# Specific for the LLM project
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+.git
+.gitignore
+
+.env
+
+venv/
+.venv/
+
+.idea/
+.vscode/
+
+chroma/
+
+*.log
+
+tests/

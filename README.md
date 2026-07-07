@@ -2,6 +2,74 @@
 
 This repository is 
 
+## How to setup the LLM course (on CPU computer)
+
+2 containers:
+
+- chatbot (our Python/FastAPI application)
+- ollama (the local LLM server)
+
+PDF
+↓
+Chunks
+↓
+Embeddings
+↓
+Chroma (Vector Database)
+
+You'll be able to test Ollama directly:
+```bash
+curl http://localhost:11434/api/tags
+```
+
+
+```bash
+# Docker - Inside the repository directory
+docker compose up --build
+
+#To rebuild after changing dependencies:
+docker compose build
+
+# ---------------
+# You only need to do this once; the model is stored in the persistent ollama-data volume.
+#docker exec -it ollama ollama pull llama3.2:3b
+
+# Test
+curl -X POST http://localhost:8000/chat -H "Content-Type: application/json" -d '{"question":"What products do we sell?"}'
+#To run in the background:
+docker compose up -d
+#To stop:
+docker compose down
+```
+
+0) Prepare the python environment (Miniconda OR Docker)
+0.1) 
+0.2) Install Miniconda 
+
+```bash
+# Miniconda
+pip install -r requirements.txt
+
+cd LLM_training
+
+jupyter lab --ip=0.0.0.0 --allow-root --no-browser
+```
+
+```bash
+# How to use LLMs on Google Colab
+# TO DO
+
+```
+
+
+
+1) Download the specific model where we are going to do fine tuning:
+
+2) verify he Jupyter notebook
+
+3)
+
+
 From:
 - "Claude Code in Action" course (by Anthropic - with Coursera) 
 
@@ -50,7 +118,7 @@ It automatically includes a file's contents in your request to Claude
 ? for list of possible shortcuts
 
 __TIP__: you can append IMAGES to your requests/prompts
-__TIP 2__: you can also add "think" or "plan" words (depth vs breadth) to make Claude make better researches to fidn better solutions to your requests (with different degrees depending on how much tokens it can use to generate better solutions) 
+__TIP 2__: you can also add "think" or "plan" words (depth vs breadth) to make Claude make better researches to fidn better solutions to your requests (with different degrees depending on how many tokens it consumes to generate better solutions) 
 
 - __Planning__ when we want Claude to understand many parts on the project code (particular tricky bit of the project).
 - __Thinking__ is more when it has to research more to find a solution to a complex problem (like several steps to complete).

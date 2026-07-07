@@ -1,0 +1,63 @@
+version: "0.1"
+
+services:
+
+  chatbot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: rag-chatbot
+
+    restart: unless-stopped
+
+    depends_on:
+      - ollama
+
+    ports:
+      - "8000:8000"
+    
+    env_file:
+    - .env
+
+    volumes:
+      # Application source (hot reload during development)
+      - ./app:/app/app
+
+      # Knowledge base
+      - ./data:/app/data
+
+      # Persist vector database
+      - ./chroma:/app/chroma
+
+    networks:
+      - rag-network
+
+  ollama:
+
+    image: ollama/ollama:latest
+
+    container_name: ollama
+
+    restart: unless-stopped
+
+    ports:
+      - "11434:11434"
+
+    volumes:
+      # Persist downloaded models
+      - ollama-data:/root/.ollama
+      - ./init-ollama.sh:/init-ollama.sh
+
+    command: ["sh", "/init-ollama.sh"]
+
+    networks:
+      - rag-network
+
+# Creates an isolated network shared by both containers.
+networks:
+  rag-network:
+    driver: bridge
+
+volumes:
+  ollama-data:
