@@ -1,7 +1,7 @@
 # ==========================================
 # Base Image
 # ==========================================
-FROM python:3.12-sli
+FROM python:3.12-slim
 
 # Prevent Python from creating .pyc files
 ENV PYTHONDONTWRITEBYTECODE=1

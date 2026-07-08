@@ -1,0 +1,62 @@
+In its familiar form, Newton's third law is not always valid. It is an excellent approximation in classical mechanics, but there are important situations where it must be modified or replaced.
+
+Here's the breakdown:
+
+When it is valid
+
+Newton's third law states:
+
+If object A exerts a force on object B, then object B exerts an equal and opposite force on object A.
+
+This works very well for:
+
+Everyday mechanics (cars, balls, people pushing on walls)
+Rigid bodies
+Most engineering problems
+Situations where forces act essentially instantaneously
+
+For example, if you push on a wall with 100 N, the wall pushes back on you with 100 N.
+
+When it breaks down
+1. Electromagnetic interactions
+
+If charged particles are moving, the forces between them are carried by electromagnetic fields that propagate at the speed of light.
+
+At a given instant:
+
+The force on A due to B may not be exactly equal and opposite to the force on B due to A.
+The electromagnetic field itself carries momentum.
+
+The total momentum of particles + field is still conserved, even though the simple third-law pair may not hold.
+
+2. Relativity
+
+In Special Relativity, information cannot travel faster than light. Since interactions are not instantaneous, the traditional statement of Newton's third law is no longer fundamental.
+
+Instead, conservation of momentum arises from deeper principles in relativistic physics.
+
+3. Quantum physics
+
+In quantum mechanics, particles interact through quantum fields rather than classical forces. Newton's laws are no longer the basic description, although they emerge approximately at macroscopic scales.
+
+What always survives?
+
+The more fundamental principle is conservation of momentum.
+
+According to Noether's theorem:
+
+If the laws of physics are the same everywhere in space (translational symmetry),
+then total momentum is conserved.
+
+Newton's third law is one way to guarantee momentum conservation in simple classical systems, but it is not the deepest physical law.
+
+Summary
+Situation	Third law valid?
+Everyday mechanics	✅ Yes
+Classical contact forces	✅ Yes
+Gravity (Newtonian)	✅ Yes
+Electromagnetic systems with radiation or time delays	❌ Not always
+Relativistic physics	❌ Not fundamental
+Quantum physics	❌ Replaced by quantum field theory
+
+So the answer is: No. Newton's third law is not universally valid. It is an excellent classical approximation, while conservation of momentum is the more fundamental principle that remains valid in modern physics.

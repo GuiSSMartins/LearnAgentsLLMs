@@ -1,0 +1,28 @@
+name: rag-chatbot
+
+channels:
+  - conda-forge
+
+dependencies:
+
+  - python=3.12
+  - pip
+  - pandas
+  - openpyxl
+
+  - pip:
+      - fastapi
+      - uvicorn
+      - langchain
+      - langchain-community
+      - langchain-core
+      - langchain-chroma
+      - chromadb
+      - sentence-transformers
+      - ollama
+      - pydantic
+      - python-dotenv
+      - pymupdf
+      - markdown
+      - beautifulsoup4
+      - python-docx

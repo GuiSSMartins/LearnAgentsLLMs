@@ -12,7 +12,7 @@ from typing import List
 
 from langchain_chroma import Chroma
 from langchain_core.documents import Document
-
+from app.models import RetrievedDocument
 from app.config import settings
 from app.embeddings import get_embeddings
 
@@ -32,15 +32,15 @@ def get_database() -> Chroma:
         persist_directory=str(settings.CHROMA_PATH)
     )
 
-
-def add_documents(documents: List[Document]) -> None:
+def add_documents(documents: list[Document]) -> int:
     """
     Store documents in Chroma.
     """
 
     db = get_database()
-
     db.add_documents(documents)
+
+    return len(documents)
 
 def get_retriever():
     db = get_database()
@@ -54,19 +54,28 @@ def get_retriever():
 def similarity_search(
     query: str,
     k: int | None = None
-) -> List[Document]:
+) -> list[RetrievedDocument]:
     """
-    Search the vector database.
-
-    Returns the most relevant documents.
+    Retrieve the most similar documents.
     """
 
     db = get_database()
-
-    return db.similarity_search(
+    results = db.similarity_search_with_score(
         query,
         k=k or settings.TOP_K
     )
+
+    retrieved = []
+    for rank, (document, score) in enumerate(results, start=1):
+        retrieved.append(
+            RetrievedDocument(
+                document=document,
+                score=float(score),
+                rank=rank
+            )
+        )
+
+    return retrieved
 
 
 def clear_database() -> None:

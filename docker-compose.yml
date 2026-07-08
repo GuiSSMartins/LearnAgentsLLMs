@@ -30,6 +30,8 @@ services:
       # Persist vector database
       - ./chroma:/app/chroma
 
+      - huggingface-cache:/root/.cache/huggingface
+
     networks:
       - rag-network
 
@@ -47,9 +49,9 @@ services:
     volumes:
       # Persist downloaded models
       - ollama-data:/root/.ollama
-      - ./init-ollama.sh:/init-ollama.sh
+      #- ./init-ollama.sh:/init-ollama.sh
 
-    command: ["sh", "/init-ollama.sh"]
+    #command: ["sh", "/init-ollama.sh"]
 
     networks:
       - rag-network
@@ -61,3 +63,4 @@ networks:
 
 volumes:
   ollama-data:
+  huggingface-cache:

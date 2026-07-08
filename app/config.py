@@ -42,6 +42,10 @@ class Settings:
         "llama3.2:3b"
     )
 
+    OLLAMA_NUM_THREAD: int = int(
+        os.getenv("OLLAMA_NUM_THREAD", 8)
+    )
+
     # --------------------------------------------------
     # Chroma
     # --------------------------------------------------

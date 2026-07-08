@@ -17,25 +17,63 @@ Embeddings
 ↓
 Chroma (Vector Database)
 
+
+Then add to the .env file this:
+
+ENABLE_IMAGE_PROCESSING=True
+ENABLE_OCR=True
+ENABLE_IMAGE_CAPTIONING=Flase # disabled by default
+
+
+data/
+├── pdf/
+├── txt/
+├── md/
+├── docx/
+├── html/
+├── csv/
+├── excel/
+└── json/
+
 You'll be able to test Ollama directly:
 ```bash
 curl http://localhost:11434/api/tags
 ```
 
+If you wish to rebuild all of the database, you can just do:
+```bash
+python app/ingest.py
+# OR
+python app/ingest.py --rebuild
+```
+
+To run the 
+
+```bash
+python app/ingest.py
+
 
 ```bash
 # Docker - Inside the repository directory
 docker compose up --build
+# run ollama image OR execute the following command: 
+docker exec -it ollama ollama serve
+docker exec -it ollama ollama pull llama3.2:3b
+docker exec -it ollama ollama pull nomic-embed-text
+
+#Only for the first time
+docker exec -it rag-chatbot python -m app.ingest --rebuild
+http://localhost:8000/docs
+http://localhost:8000/chat
+# Test
+curl -X POST http://localhost:8000/chat \
+-H "Content-Type: application/json" \
+-d '{"question":"What is this project about?"}'
 
 #To rebuild after changing dependencies:
 docker compose build
 
 # ---------------
-# You only need to do this once; the model is stored in the persistent ollama-data volume.
-#docker exec -it ollama ollama pull llama3.2:3b
-
-# Test
-curl -X POST http://localhost:8000/chat -H "Content-Type: application/json" -d '{"question":"What products do we sell?"}'
 #To run in the background:
 docker compose up -d
 #To stop:
@@ -49,6 +87,11 @@ docker compose down
 ```bash
 # Miniconda
 pip install -r requirements.txt
+
+ollama serve
+ollama pull llama3.2:3b
+ollama pull nomic-embed-text
+# Change to 
 
 cd LLM_training
 
