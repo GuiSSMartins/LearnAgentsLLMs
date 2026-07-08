@@ -201,3 +201,5 @@ chroma/
 *.log
 
 tests/
+
+data/
