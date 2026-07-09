@@ -51,7 +51,6 @@ class DocumentLoader:
         """
 
         documents = []
-
         documents.extend(self._load_pdfs())
         documents.extend(self._load_txt())
         documents.extend(self._load_markdown())
@@ -60,7 +59,6 @@ class DocumentLoader:
         documents.extend(self._load_csv())
         documents.extend(self._load_excel())
         documents.extend(self._load_json())
-
         return documents
 
     def split(
@@ -146,6 +144,8 @@ class DocumentLoader:
 
         return loader.load()
     
+    # ---------------------------------------------------------
+
     def _load_csv(self):
 
         folder = self.data_path / "csv"
@@ -170,6 +170,8 @@ class DocumentLoader:
 
         return documents
     
+    # ---------------------------------------------------------
+
     def _load_excel(self):
 
         folder = self.data_path / "excel"
@@ -198,6 +200,8 @@ class DocumentLoader:
 
         return documents
     
+    # ---------------------------------------------------------
+
     def _load_json(self):
 
         folder = self.data_path / "json"

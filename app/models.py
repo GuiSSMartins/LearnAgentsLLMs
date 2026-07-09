@@ -5,7 +5,6 @@ Shared data models.
 from dataclasses import dataclass, field
 from langchain_core.documents import Document
 
-
 # ---------------------------------------------------------
 # Retrieval
 # ---------------------------------------------------------
@@ -15,11 +14,9 @@ class RetrievedDocument:
     """
     A document returned from the vector database.
     """
-
     document: Document
     score: float
     rank: int
-
 
 # ---------------------------------------------------------
 # Chat
@@ -37,12 +34,10 @@ class ChatRequest:
     include_sources: bool = True
     conversation_id: str | None = None
 
-
 @dataclass(slots=True)
 class ChatResponse:
     """
     Chatbot response.
     """
-
     answer: str
     sources: list[dict] = field(default_factory=list)

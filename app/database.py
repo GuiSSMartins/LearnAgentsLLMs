@@ -74,19 +74,14 @@ def similarity_search(
                 rank=rank
             )
         )
-
     return retrieved
 
 
 def clear_database() -> None:
     """
     Delete every document from the collection.
-
     Useful when rebuilding the knowledge base.
     """
-
     db = get_database()
-
     db.delete_collection()
-
     get_database.cache_clear()

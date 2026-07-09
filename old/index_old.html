@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Local RAG Chatbot</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>📚 Local RAG Chatbot</h1>
+        <div id="chat"></div>
+        <div class="input">
+            <textarea id="question"></textarea>
+            <button onclick="sendQuestion()">
+                Send
+            </button>
+        </div>
+    </div>
+
+    <script>
+
+    async function sendQuestion(){
+        const textarea = document.getElementById("question");
+        const question = textarea.value;
+        if(question==="")
+            return;
+        addMessage(question,"user");
+        textarea.value="";
+        const response = await fetch("/chat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                question: question
+            })
+        });
+        const data = await response.json();
+        addMessage(data.answer,"assistant");
+
+    }
+
+    function addMessage(text, role){
+        const chat=document.getElementById("chat");
+        const div=document.createElement("div");
+        div.className=role;
+        div.innerText=text;
+        chat.appendChild(div);
+        chat.scrollTop=chat.scrollHeight;
+    }
+
+    </script>
+
+</body>
+
+</html>

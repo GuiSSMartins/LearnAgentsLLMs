@@ -66,6 +66,7 @@ docker exec -it ollama ollama pull nomic-embed-text
 #Only for the first time
 docker compose restart chatbot
 docker exec -it rag-chatbot python -m app.ingest --rebuild
+http://localhost:8000
 http://localhost:8000/docs
 http://localhost:8000/chat
 # Test
@@ -81,6 +82,13 @@ docker compose build
 docker compose up -d
 #To stop:
 docker compose down
+```
+
+To launch the application:
+```bash
+docker exec -it rag-chatbot python -m app/web.py
+http://localhost:8001
+python app/web.py
 ```
 
 0) Prepare the python environment (Miniconda OR Docker)

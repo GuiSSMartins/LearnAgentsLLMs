@@ -10,12 +10,10 @@ from app.prompts import (
     build_prompt,
 )
 from app.retriever import Retriever
-
 from app.models import (
     ChatRequest,
     ChatResponse,
 )
-
 
 class Chatbot:
 

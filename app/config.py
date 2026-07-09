@@ -70,7 +70,7 @@ class Settings:
 
     EMBEDDING_DEVICE: str = os.getenv(
         "EMBEDDING_DEVICE",
-        "cpu"
+        "cpu" # "cuda"
     )
 
     # --------------------------------------------------

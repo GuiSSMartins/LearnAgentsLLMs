@@ -17,7 +17,6 @@ def get_llm() -> Client:
     """
     Return a singleton Ollama client.
     """
-
     return Client(
         host=settings.OLLAMA_HOST
     )
@@ -34,7 +33,6 @@ def generate(
 
     client = get_llm()
     messages = []
-
     if system:
         messages.append(
             {

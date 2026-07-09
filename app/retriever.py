@@ -11,22 +11,20 @@ from app.models import RetrievedDocument
 
 class Retriever:
 
-    def __init__(
-        self,
+    def __init__(self,
         top_k: int | None = None
     ):
-        self.db = get_database()
+        #self.db = get_database()
         self.top_k = top_k or settings.TOP_K
 
     def _retrieve(self, question):
-
-        return self.db.similarity_search_with_score(
+        db = get_database()
+        return db.similarity_search_with_score(
             question,
             k=self.top_k
         )
     
     def _convert(self, results):
-
         documents = []
         for rank, (doc, score) in enumerate(results, start=1):
             documents.append(
@@ -36,12 +34,9 @@ class Retriever:
                     rank=rank
                 )
             )
-
         return documents
     
-    def search(
-        self,
-        question: str
+    def search(self, question: str
     ) -> List[RetrievedDocument]:
         """
         Retrieve the most relevant documents.

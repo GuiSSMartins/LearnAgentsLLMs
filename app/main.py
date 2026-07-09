@@ -6,6 +6,10 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
+from fastapi import Request
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 
 from app.chatbot import Chatbot
 from app.ingest import ingest_documents
@@ -14,6 +18,7 @@ from app.models import (
     ChatRequest,
     ChatResponse,
 )
+
 
 # Singleton chatbot instance
 chatbot = Chatbot()
@@ -26,9 +31,7 @@ async def lifespan(app: FastAPI):
     """
 
     print("Starting RAG Chatbot...")
-
     yield
-
     print("Stopping RAG Chatbot...")
 
 
@@ -39,20 +42,44 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+app.mount(
+    "/static",
+    StaticFiles(directory="app/static"),
+    name="static"
+)
 
+templates = Jinja2Templates(
+    directory="app/templates"
+)
+
+"""
 @app.get("/")
 def root():
+    return {
+        "application": "Offline RAG Chatbot",
+        "version": "1.0.0",
+        "status": "running"
+    }
+"""
+@app.get("/", response_class=HTMLResponse)
+def home(request: Request):
+    return templates.TemplateResponse(
+        "index.html",
+        {
+            "request": request
+        }
+    )
 
+@app.get("/info")
+def info():
     return {
         "application": "Offline RAG Chatbot",
         "version": "1.0.0",
         "status": "running"
     }
 
-
 @app.get("/health")
 def health():
-
     return {
         "status": "ok",
         "llm": is_available()
@@ -66,9 +93,7 @@ def health():
 def chat(
     request: ChatRequest
 ):
-
     response = chatbot.ask(request)
-
     return response
 
 
@@ -76,11 +101,9 @@ def chat(
 def ingest(
     rebuild: bool = False
 ):
-
     ingest_documents(
         rebuild=rebuild
     )
-
     return {
         "status": "completed",
         "rebuild": rebuild
@@ -92,7 +115,6 @@ async def global_exception_handler(
     request,
     exc
 ):
-
     return JSONResponse(
         status_code=500,
         content={
