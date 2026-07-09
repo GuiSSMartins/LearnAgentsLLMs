@@ -55,13 +55,16 @@ python app/ingest.py
 
 ```bash
 # Docker - Inside the repository directory
+docker compose pull
 docker compose up --build
 # run ollama image OR execute the following command: 
 docker exec -it ollama ollama serve
-docker exec -it ollama ollama pull llama3.2:3b
+#docker exec -it ollama ollama pull llama3.2:3b
+docker exec -it ollama ollama pull qwen2.5:7b
 docker exec -it ollama ollama pull nomic-embed-text
 
 #Only for the first time
+docker compose restart chatbot
 docker exec -it rag-chatbot python -m app.ingest --rebuild
 http://localhost:8000/docs
 http://localhost:8000/chat
